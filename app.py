@@ -132,10 +132,15 @@ if uploaded_file:
         models_dict = load_all_models()
         
         if models_dict:
-            cols = st.columns(len(models_dict))
-            
+            cols = st.columns(len(models_dict) + 1)
+
+            # Show original image in the first column
+            with cols[0]:
+                st.subheader("Original Image")
+                st.image(image, use_container_width=True)
+
             for i, (name, (model, target_layer)) in enumerate(models_dict.items()):
-                with cols[i]:
+                with cols[i + 1]:
                     st.subheader(f"Model: {name.upper()}")
                     
                     try:
